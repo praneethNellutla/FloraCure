@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 
 class ChatScreen extends StatelessWidget {
   final dynamic user;
-  const ChatScreen({super.key, required this.user});
+  const ChatScreen({
+    super.key,
+    required this.user,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[400],
       body: Center(
         child: Column(
           children: [
@@ -23,13 +27,14 @@ class ChatScreen extends StatelessWidget {
                   if (snapshot.hasData) {
                     return ListView.builder(
                         itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          final post = snapshot.data!.docs[index];
+                        itemBuilder: (context, i) {
+                          final post = snapshot.data!.docs[i];
                           return Post(
                             image: post["image"],
                             user: post["from_name"],
                             time: post["time"],
                             status: post["status"],
+                            index: i,
                           );
                         });
                   } else if (snapshot.hasError) {

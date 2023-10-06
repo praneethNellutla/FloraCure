@@ -1,6 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:http/http.dart' as http;
+
 import 'package:flora_cure/screens/farmer_dashboard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -18,42 +17,6 @@ class SendImage extends StatefulWidget {
 
 class _SendImageState extends State<SendImage> {
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
-
-  String _output1 = "";
-  String _output2 = "";
-  String _output3 = "";
-
-  Future<void> sendUrl(String downloadUrl) async {
-    final url = downloadUrl.trim();
-
-    if (url.isEmpty) {
-      return;
-    }
-
-    try {
-      final response = await http.post(
-        Uri.parse('http://10.9.2.221:5000/upload'),
-        body: {'url': url},
-      );
-
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-
-        setState(() {
-          _output1 = data['Plant name'];
-          _output2 = data['confident score'];
-          _output3 = data['treatment'];
-        });
-        print("output 1$_output1");
-        print("output 2$_output2");
-        print("output 3$_output3");
-      } else {
-        print('Request failed with status: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error: ${e}');
-    }
-  }
 
   void uploadImage(BuildContext context) async {
     try {
@@ -77,9 +40,8 @@ class _SendImageState extends State<SendImage> {
           "time": DateTime.now(),
         });
 
-        sendUrl(downloadURL);
-
         Navigator.of(_keyLoader.currentContext!, rootNavigator: true).pop();
+        Navigator.pop(context);
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => FarmerDashBoard(
             user: widget.user,

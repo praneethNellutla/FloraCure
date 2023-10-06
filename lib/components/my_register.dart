@@ -94,9 +94,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 30,
               ),
               // logo
-              const Icon(
-                Icons.lock,
-                size: 80,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(43.0),
+                child: Image.asset(
+                  'assets/appIcon.jpg',
+                  width: 105.0,
+                  height: 105.0,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(
                 height: 30,

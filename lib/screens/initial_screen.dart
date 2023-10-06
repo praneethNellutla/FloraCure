@@ -25,10 +25,14 @@ class _InitialScreenState extends State<InitialScreen> {
               const SizedBox(
                 height: 80,
               ),
-              Icon(
-                Icons.play_circle_outline_sharp,
-                size: 100.0,
-                color: Colors.grey[700],
+              ClipRRect(
+                borderRadius: BorderRadius.circular(43.0),
+                child: Image.asset(
+                  'assets/appIcon.jpg',
+                  width: 105.0,
+                  height: 105.0,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(
                 height: 30.0,
